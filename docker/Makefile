@@ -11,7 +11,8 @@ help:
 	@echo ""
 	@echo "Commands:"
 	@echo "  clean               Clean directories for reset"
-	@echo "  composer-up         Update PHP dependencies with composer"
+	@echo "  composer-update     Update PHP dependencies with composer"
+	@echo "  composer-install    Install PHP dependencies with composer"
 	@echo "  docker-start        Create and start containers"
 	@echo "  docker-stop         Stop and clear all services"
 	@echo "  gen-certs           Generate SSL certificates"
@@ -30,8 +31,11 @@ clean:
 	@rm -Rf ../report
 	@rm -Rf etc/ssl/*
 
-composer-up:
-	@docker run --rm -v $(shell pwd)/..:/app composer update
+composer-update:
+	@docker run --rm -v "$PWD/..":/app composer update
+
+composer-install:
+	@docker run --rm -v "$PWD/..":/app composer install
 
 docker-start:
 	docker-compose up -d
