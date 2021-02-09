@@ -20,6 +20,8 @@ services:
   php:
     image: nanoninja/php-fpm:${PHP_VERSION}
     restart: always
+    env_file:
+      - php.env
     volumes:
       - ./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini
       - ../:/var/www/html
@@ -42,7 +44,7 @@ services:
   mysqldb:
     image: mysql:${MYSQL_VERSION}
     container_name: ${MYSQL_HOST}
-#    restart: always
+    restart: always
     env_file:
       - .env
     environment:
